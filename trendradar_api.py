@@ -1,11 +1,22 @@
-from trendradar.crawler.fetcher import DataFetcher
+import sys
+import os
 import pandas as pd
-
-# 读取config.yaml
 import yaml
 
-with open('config/config.yaml', 'r', encoding='utf-8') as f:
-        config = yaml.safe_load(f)
+# 添加 trendradar 包路径到 sys.path
+trendradar_root = os.path.dirname(__file__)
+trendradar_package = os.path.join(trendradar_root, 'trendradar')
+
+if trendradar_package not in sys.path:
+    sys.path.insert(0, trendradar_package)
+
+# 现在可以导入 crawler
+from crawler.fetcher import DataFetcher
+
+# 读取config.yaml
+config_path = os.path.join(trendradar_root, 'config', 'config.yaml')
+with open(config_path, 'r', encoding='utf-8') as f:
+    config = yaml.safe_load(f)
         
 # 读取config中的platforms：
 platform_ids = [platform['id'] for platform in config['platforms']]
