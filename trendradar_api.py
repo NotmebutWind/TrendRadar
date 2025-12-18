@@ -19,7 +19,7 @@ with open(config_path, 'r', encoding='utf-8') as f:
     config = yaml.safe_load(f)
         
 # 读取config中的platforms：
-platform_ids = [platform['id'] for platform in config['platforms']]
+platform_ids = ['cls-hot', 'wallstreetcn-hot']
 print(f"加载的平台ID列表: {platform_ids}")
 
 def results_to_dataframe(results, source_name=None):
